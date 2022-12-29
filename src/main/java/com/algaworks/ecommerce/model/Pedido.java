@@ -16,7 +16,11 @@ import java.util.List;
 @Table(name = "pedido")
 public class Pedido extends EntidadeBaseInteger {
 
-  @Column(name = "data_criacao", updatable = false)
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "cliente_id", nullable = false, foreignKey = @ForeignKey(name = "fk_pedido_cliente"))
+  private Cliente cliente;
+
+  @Column(name = "data_criacao", updatable = false, nullable = false)
   private LocalDateTime dataCriacao;
 
   @Column(name = "data_ultima_atualizacao", insertable = false)
@@ -28,17 +32,16 @@ public class Pedido extends EntidadeBaseInteger {
   @OneToOne(mappedBy = "pedido")
   private NotaFiscal notaFiscal;
 
+  @Column(nullable = false)
   private BigDecimal total;
 
+  @Column(length = 30, nullable = false)
   @Enumerated(EnumType.STRING)
   private StatusPedido status;
 
   @Embedded
   private EnderecoEntregaPedido enderecoEntrega;
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "cliente_id")
-  private Cliente cliente;
 
   @OneToMany(mappedBy = "pedido")
   private List<ItemPedido> itens;

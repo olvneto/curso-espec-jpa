@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class OperacoesComTransacao extends EntityManagerTest {
 
@@ -30,6 +32,9 @@ public class OperacoesComTransacao extends EntityManagerTest {
     produto.setNome("Microfone Rode Videmic");
     produto.setDescricao("A melhor solução para som.");
     produto.setPreco(new BigDecimal(1_000));
+
+    produto.setTags(Arrays.asList("kindle"));
+    produto.setDataCriacao(LocalDateTime.now());
 
     entityManager.getTransaction().begin();
     produto = entityManager.merge(produto);
@@ -63,6 +68,8 @@ public class OperacoesComTransacao extends EntityManagerTest {
     produto.setNome("Kindle PaperWhite");
     produto.setDescricao("O novo Kindle");
     produto.setPreco(new BigDecimal(529));
+    produto.setTags(Arrays.asList("kindle"));
+    produto.setDataCriacao(LocalDateTime.now());
 
     entityManager.getTransaction().begin();
     produto = entityManager.merge(produto);

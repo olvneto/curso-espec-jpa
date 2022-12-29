@@ -17,18 +17,21 @@ public class ItemPedido {
   @EmbeddedId
   private ItemPedidoId id;
 
-  @Column(name = "preco_produto")
+  @Column(name = "preco_produto", nullable = false)
   private BigDecimal precoProduto;
 
+  @Column(nullable = false)
   private Integer quantidade;
 
   @MapsId("pedidoId")
   @ManyToOne(optional = false)
-  @JoinColumn(name = "pedido_id")
+  @JoinColumn(name = "pedido_id",
+          foreignKey = @ForeignKey(name = "fk_item_pedido_pedido"), nullable = false)
   private Pedido pedido;
 
   @MapsId("produtoId")
   @ManyToOne(optional = false)
-  @JoinColumn(name = "produto_id")
+  @JoinColumn(name = "produto_id",
+          foreignKey = @ForeignKey(name = "fk_item_pedido_produto"), nullable = false)
   private Produto produto;
 }
