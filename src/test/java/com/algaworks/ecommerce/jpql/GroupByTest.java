@@ -1,16 +1,57 @@
 package com.algaworks.ecommerce.jpql;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.Pedido;
 import org.junit.Assert;
 import org.junit.Test;
 
 import javax.persistence.TypedQuery;
+import java.util.Arrays;
 import java.util.List;
 
 public class GroupByTest extends EntityManagerTest {
 
     @Test
+    public void usarExpressaoIN() {
+        Cliente cliente1 = new Cliente(); // entityManager.find(Cliente.class, 1);
+        cliente1.setId(1);
+
+        Cliente cliente2 = new Cliente(); // entityManager.find(Cliente.class, 2);
+        cliente2.setId(2);
+
+        List<Cliente> clientes = Arrays.asList(cliente1, cliente2);
+
+        String jpql = "select p from Pedido p where p.cliente in (:clientes)";
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+        typedQuery.setParameter("clientes", clientes);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+    }
+
+    @Test
+    public void condicionarAgrupamentoComHaving() {
+//         Total de vendas dentre as categorias que mais vendem.
+        String jpql = "select cat.nome, sum(ip.precoProduto) from ItemPedido ip " +
+                " join ip.produto pro join pro.categorias cat " +
+                " group by cat.id " +
+                " having sum(ip.precoProduto) > 100 ";
+
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+
+        List<Object[]> lista = typedQuery.getResultList();
+
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(arr -> System.out.println(arr[0] + ", " + arr[1]));
+    }
+
+    @Test
     public void agruparEFiltrarResultado() {
+
+
 //         Total de vendas por mês.
 //        String jpql = "select concat(year(p.dataCriacao), '/', function('monthname', p.dataCriacao)), sum(p.total) " +
 //                " from Pedido p " +
