@@ -4,12 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
+@NamedStoredProcedureQuery(name = "compraram_acima_media", procedureName = "compraram_acima_media",
+        parameters = {
+                @StoredProcedureParameter(name = "ano", type = Integer.class, mode = ParameterMode.IN)
+        },
+        resultClasses = Cliente.class
+)
 @SecondaryTable(name = "cliente_detalhe",
         pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"),
         foreignKey = @ForeignKey(name = "fk_cliente_detalhe_cliente"))
@@ -19,9 +26,11 @@ import java.util.Map;
         indexes = {@Index(name = "idx_nome", columnList = "nome")})
 public class Cliente extends EntidadeBaseInteger {
 
+  @NotBlank
   @Column(length = 100, nullable = false)
   private String nome;
 
+  @NotBlank
   @Column(length = 14, nullable = false)
   private String cpf;
 
