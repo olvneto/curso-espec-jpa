@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -15,7 +16,10 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 public class Atributo {
 
-  @Column(length = 100, nullable = false)
-  private String nome;
-  private String valor;
+    @NotBlank
+    @Column(length = 100, nullable = false)
+    private String nome;
+
+    @NotBlank
+    private String valor;
 }

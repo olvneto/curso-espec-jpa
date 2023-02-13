@@ -28,8 +28,8 @@ public class ConsultaNativaTest extends EntityManagerTest {
 
         List<Categoria> lista = query.getResultList();
 
-        lista.stream().forEach(obj -> System.out.println(
-                String.format("Categoria => ID: %s, Nome: %s", obj.getId(), obj.getNome())));
+        lista.forEach(obj ->
+                System.out.format("Categoria => ID: %s, Nome: %s\n", obj.getId(), obj.getNome()));
     }
 
     @Test

@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -45,12 +47,14 @@ public class Cliente extends EntidadeBaseInteger {
   @Transient
   private String primeiroNome;
 
-  @Column(table = "cliente_detalhe", length = 30, nullable = false)
-  @Enumerated(EnumType.STRING)
-  private SexoCliente sexo;
+    @NotNull
+    @Column(table = "cliente_detalhe", length = 30, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SexoCliente sexo;
 
-  @Column(name = "data_nascimento", table = "cliente_detalhe")
-  private LocalDateTime dataNascimento;
+    @Past
+    @Column(name = "data_nascimento", table = "cliente_detalhe")
+    private LocalDateTime dataNascimento;
 
   @OneToMany(mappedBy = "cliente")
   private List<Pedido> pedidos;

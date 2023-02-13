@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Getter
@@ -19,24 +21,30 @@ import java.math.BigDecimal;
 @Table(name = "item_pedido")
 public class ItemPedido {
 
-  @EmbeddedId
-  private ItemPedidoId id;
+    @EmbeddedId
+    private ItemPedidoId id;
 
-  @Column(name = "preco_produto", nullable = false)
-  private BigDecimal precoProduto;
+    @Positive
+    @NotNull
+    @Column(name = "preco_produto", nullable = false)
+    private BigDecimal precoProduto;
 
-  @Column(nullable = false)
-  private Integer quantidade;
+    @Positive
+    @NotNull
+    @Column(nullable = false)
+    private Integer quantidade;
 
-  @MapsId("pedidoId")
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "pedido_id",
-          foreignKey = @ForeignKey(name = "fk_item_pedido_pedido"), nullable = false)
-  private Pedido pedido;
+    @NotNull
+    @MapsId("pedidoId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "pedido_id",
+            foreignKey = @ForeignKey(name = "fk_item_pedido_pedido"), nullable = false)
+    private Pedido pedido;
 
-  @MapsId("produtoId")
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "produto_id",
-          foreignKey = @ForeignKey(name = "fk_item_pedido_produto"), nullable = false)
-  private Produto produto;
+    @NotNull
+    @MapsId("produtoId")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "produto_id",
+            foreignKey = @ForeignKey(name = "fk_item_pedido_produto"), nullable = false)
+    private Produto produto;
 }
