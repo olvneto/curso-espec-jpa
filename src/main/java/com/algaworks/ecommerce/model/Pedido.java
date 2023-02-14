@@ -16,6 +16,7 @@ import java.util.List;
 
 @Getter
 @Setter
+//@Cacheable
 @NamedEntityGraphs({
         @NamedEntityGraph(
                 name = "Pedido.dadosEssencias",
