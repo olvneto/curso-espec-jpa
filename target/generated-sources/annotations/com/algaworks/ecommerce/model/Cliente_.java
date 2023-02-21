@@ -1,7 +1,7 @@
 package com.algaworks.ecommerce.model;
 
 import java.time.LocalDateTime;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.MapAttribute;
 import javax.persistence.metamodel.SingularAttribute;
