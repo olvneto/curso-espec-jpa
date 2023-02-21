@@ -59,11 +59,11 @@
             <!--                      value="com.algaworks.ecommerce.hibernate.EcmSchemaMultiTenantConnectionProvider"/>-->
 
             <!-- Bancos em máquinas diferentes -->
-            <property name="hibernate.multiTenancy" value="DATABASE"/>
-            <property name="hibernate.tenant_identifier_resolver"
-                      value="com.algaworks.ecommerce.hibernate.EcmCurrentTenantIdentifierResolver"/>
-            <property name="hibernate.multi_tenant_connection_provider"
-                      value="com.algaworks.ecommerce.hibernate.EcmMachineMultiTenantConnectionProvider"/>
+            <!--            <property name="hibernate.multiTenancy" value="DATABASE"/>-->
+            <!--            <property name="hibernate.tenant_identifier_resolver"-->
+            <!--                      value="com.algaworks.ecommerce.hibernate.EcmCurrentTenantIdentifierResolver"/>-->
+            <!--            <property name="hibernate.multi_tenant_connection_provider"-->
+            <!--                      value="com.algaworks.ecommerce.hibernate.EcmMachineMultiTenantConnectionProvider"/>-->
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
